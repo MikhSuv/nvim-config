@@ -7,12 +7,13 @@ Install also [vim-plug](https://github.com/junegunn/vim-plug) — plugin manager
 Put [init.vim](init.vim) to `~/.config/nvim/init.vim` folder.
 
 ## Language support
-Find and install lsp for your language. Then add its name to the `servers` list. Example:
+Find and install lsp for your language. Then add its name to the `servers` list in `init.vim`. Example:
 ```
 local servers = { 'pyright', 'rust_analyzer' }
 ```
 
-Install [ripgerp](https://github.com/BurntSushi/ripgrep?tab=readme-ov-file#installation)
+Install [ripgerp](https://github.com/BurntSushi/ripgrep?tab=readme-ov-file#installation).
 ## LSP
-For C/C++ -- [clangd](https://clangd.llvm.org/installation)
-For python -- [pyright](https://github.com/microsoft/pyright)
+For C/C++ - [clangd](https://clangd.llvm.org/installation).
+
+For python - [pyright](https://github.com/microsoft/pyright).
