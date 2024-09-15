@@ -45,23 +45,23 @@ Plug 'Pocco81/auto-save.nvim'
 Plug 'justinmk/vim-sneak'
 
 " JS/JSX/TS
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'maxmellon/vim-jsx-pretty'
+"Plug 'pangloss/vim-javascript'
+"Plug 'leafgarland/typescript-vim'
+"Plug 'peitalin/vim-jsx-typescript'
+"Plug 'maxmellon/vim-jsx-pretty'
 " TS from here https://jose-elias-alvarez.medium.com/configuring-neovims-lsp-client-for-typescript-development-5789d58ea9c
 Plug 'jose-elias-alvarez/null-ls.nvim'
-Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+"Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'nvim-lua/plenary.nvim'
 
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'npm install --frozen-lockfile --production',
-  \ 'for': ['javascript', 'typescript', 'typescriptreact', 'javascriptreact', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+"Plug 'prettier/vim-prettier', {
+ " \ 'do': 'npm install --frozen-lockfile --production',
+  "\ 'for': ['javascript', 'typescript', 'typescriptreact', 'javascriptreact', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
 
 Plug 'bmatcuk/stylelint-lsp'
 
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+"Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
+"Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 " Convenient floating terminal window
 "Plug 'voldikss/vim-floaterm'
@@ -209,25 +209,25 @@ local on_attach = function(client, bufnr)
 end
 
 -- TS setup
-local buf_map = function(bufnr, mode, lhs, rhs, opts)
-    vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
-        silent = true,
-    })
-end
+--local buf_map = function(bufnr, mode, lhs, rhs, opts)
+--   vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
+--        silent = true,
+--    })
+--end
 
-nvim_lsp.tsserver.setup({
-    on_attach = function(client, bufnr)
-        client.server_capabilities.document_formatting = false
-        client.server_capabilities.document_range_formatting = false
-        local ts_utils = require("nvim-lsp-ts-utils")
-        ts_utils.setup({})
-        ts_utils.setup_client(client)
-        buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>")
-        buf_map(bufnr, "n", "gi", ":TSLspRenameFile<CR>")
-        buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
-        on_attach(client, bufnr)
-    end,
-})
+--nvim_lsp.tsserver.setup({
+--    on_attach = function(client, bufnr)
+--        client.server_capabilities.document_formatting = false
+--        client.server_capabilities.document_range_formatting = false
+--        local ts_utils = require("nvim-lsp-ts-utils")
+--        ts_utils.setup({})
+--        ts_utils.setup_client(client)
+--        buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>")
+--        buf_map(bufnr, "n", "gi", ":TSLspRenameFile<CR>")
+--        buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
+--        on_attach(client, bufnr)
+--    end,
+--})
 
 local null_ls = require("null-ls")
 null_ls.setup({
@@ -261,6 +261,33 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
+require'lspconfig'.fortls.setup{
+    cmd = {"fortls"},
+    filetypes = {"fortran"},
+    root_dir = function(fname)
+        return vim.fn.getcwd()
+    end,
+    settings = {
+        fortran = {
+            nthreads = 1,
+            autocompletePrefix = true,
+            disableDiagnostics = false,
+            displayVerWarning = true,
+            enableCodeActions = true,
+            executablePath = "fortls",
+            hoverSignature = true,
+            includeSymbolMem = true,
+            incrementalSync = true,
+            lowercaseIntrinsics = false,
+            maxCommentLineLength = -1,
+            maxLineLength = -1,
+            notifyInit = true,
+            useSignatureHelp = true,
+            variableHover = true,
+        }
+    }
+}
+
 EOF
 
 
@@ -380,10 +407,6 @@ require("auto-save").setup(
 )
 EOF
 
-" Telescope fzf plugin
-lua << EOF
-require('telescope').load_extension('fzf')
-EOF
 
 " Fast component creating for React app
 command CreateComponent :terminal '/Users/alexeygoloburdin/code/lms/frontend/createcomponent.py'
