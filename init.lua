@@ -48,6 +48,14 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'fortran',
+    callback = function()
+        vim.keymap.set('n', '<C-h>', ':w<CR>:!gfortran % -o out; ./out<CR>', { buffer = true, silent = true })
+        vim.keymap.set('i', '<C-h>', '<Esc>:w<CR>:!gfortran % -o out; ./out<CR>', { buffer = true, silent = true })
+    end
+})
+
+vim.api.nvim_create_autocmd('FileType', {
     pattern = {'sh', 'go'},
     callback = function()
         vim.keymap.set('n', '<C-h>', ':w<CR>:!%<CR>', { buffer = true, silent = true })
@@ -169,43 +177,9 @@ lspconfig.pyright.setup({
     },
 })
 
--- Пример настройки LSP для TypeScript
-lspconfig.ts_ls.setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-})
+lspconfig.clangd.setup({})
 
--- Пример настройки LSP для Go
-lspconfig.gopls.setup({
-    cmd = { "gopls" }, -- Убедитесь, что `gopls` доступен в PATH
-    on_attach = on_attach,
-    capabilities = capabilities,
-    settings = {
-        gopls = {
-            analyses = {
-                unusedparams = true,
-            },
-            staticcheck = true,
-        },
-    },
-})
-
--- Пример настройки LSP для Rust
-lspconfig.rust_analyzer.setup({
-    cmd = { "rust-analyzer" }, -- Убедитесь, что `rust-analyzer` доступен в PATH
-    on_attach = on_attach,
-    capabilities = capabilities,
-    settings = {
-        ["rust-analyzer"] = {
-            cargo = {
-                allFeatures = true,
-            },
-            procMacro = {
-                enable = true,
-            },
-        },
-    },
-})
+lspconfig.fortls.setup({})
 
 -- Null-ls для Prettier
 require('null-ls').setup({
