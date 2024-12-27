@@ -40,6 +40,14 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'cpp',
+    callback = function()
+        vim.keymap.set('n', '<C-h>', ':w<CR>:!g++ % -o out; ./out<CR>', { buffer = true, silent = true })
+        vim.keymap.set('i', '<C-h>', '<Esc>:w<CR>:!g++ % -o out; ./out<CR>', { buffer = true, silent = true })
+    end
+})
+
+vim.api.nvim_create_autocmd('FileType', {
     pattern = {'sh', 'go'},
     callback = function()
         vim.keymap.set('n', '<C-h>', ':w<CR>:!%<CR>', { buffer = true, silent = true })
