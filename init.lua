@@ -25,8 +25,8 @@ vim.api.nvim_create_autocmd('FileType', {
     callback = function()
 
         vim.opt.colorcolumn = '88'
-        vim.keymap.set('n', '<C-h>', ':w<CR>:!python3.11 %<CR>', { buffer = true, silent = true })
-        vim.keymap.set('i', '<C-h>', '<Esc>:w<CR>:!python3.11 %<CR>', { buffer = true, silent = true })
+        vim.keymap.set('n', '<C-h>', ':w<CR>:!python3.12 %<CR>', { buffer = true, silent = true })
+        vim.keymap.set('i', '<C-h>', '<Esc>:w<CR>:!python3.12 %<CR>', { buffer = true, silent = true })
     end
 })
 
@@ -216,14 +216,14 @@ require('auto-save').setup()
 
 -- Copy selected text to Windows buffer with "*y
 vim.g.clipboard = {
-  name = 'win32yank',
+  name = 'xsel --clipboard --input',
   copy = {
-    ['+'] = 'win32yank.exe -i',
-    ['*'] = 'win32yank.exe -i',
+    ['+'] = 'xsel --clipboard --input',
+    ['*'] = 'xsel --clipboard --input',
   },
   paste = {
-    ['+'] = 'powershell -noprofile -command "Get-Clipboard"',
-    ['*'] = 'powershell -noprofile -command "Get-Clipboard"',
+    ['+'] = 'xsel --clipboard --output',
+    ['*'] = 'xsel --clipboard --output',
   },
   cache_enabled = 0,
 }
