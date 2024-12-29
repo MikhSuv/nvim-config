@@ -135,7 +135,7 @@ end)
 
 -- Color scheme
 -- vim.cmd([[colorscheme "rose-pine-main"]])
-vim.cmd([[colorscheme kanagawa-dragon]]) -- kanagawa-wave, kanagawa-dragon, kanagawa-lotus
+vim.cmd([[colorscheme kanagawa-wave]]) -- kanagawa-wave, kanagawa-dragon, kanagawa-lotus
 
 -- LSP
 local lspconfig = require('lspconfig')
