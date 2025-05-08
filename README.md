@@ -29,9 +29,9 @@ Launch Neovim and wait for automatic plugin installation, or run:
 nvim --headless "+Lazy! sync" +qa
 ```
 ### 4. Install LSP Servers
-    1. Open Neovim: `nvim`
-    2. Run `:Mason` to open LSP installer
-    3. Install required language servers (e.g., clangd, pyright, fortls)
+1. Open Neovim: `nvim`
+2. Run `:Mason` to open LSP installer
+3. Install required language servers (e.g., clangd, pyright, fortls)
 
 ## Key Bindings
 | Key | Action |
@@ -43,7 +43,6 @@ nvim --headless "+Lazy! sync" +qa
 | `K` | Show documentation |
 | `,<Space>`| Clear search highlights |
 | `,cc`/`,cb` | Toggle line/block comments|
-|----|----|
 
 ## Plugin Ecosystem
 Built with these core components:
